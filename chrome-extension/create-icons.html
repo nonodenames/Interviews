@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Extension Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .icon-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .icon-16 { width: 16px; height: 16px; font-size: 10px; }
+        .icon-32 { width: 32px; height: 32px; font-size: 18px; }
+        .icon-48 { width: 48px; height: 48px; font-size: 28px; }
+        .icon-128 { width: 128px; height: 128px; font-size: 72px; }
+        .instructions {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1>Extension Icon Creator</h1>
+        <p>This page helps you create simple icons for the Paywall Bypasser Chrome extension.</p>
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Right-click on each icon below</li>
+            <li>Select "Save image as..." or take a screenshot</li>
+            <li>Save them as icon16.png, icon32.png, icon48.png, and icon128.png in the icons/ folder</li>
+            <li>Alternatively, create your own custom icons with the same dimensions</li>
+        </ol>
+        <p><strong>Note:</strong> You can also use any image editing software to create more professional icons.</p>
+    </div>
+
+    <div class="icon-container">
+        <div class="icon icon-16" id="icon16">🔓</div>
+        <p>16x16 (icon16.png)</p>
+        <button onclick="downloadIcon('icon16', 16)">Download</button>
+    </div>
+
+    <div class="icon-container">
+        <div class="icon icon-32" id="icon32">🔓</div>
+        <p>32x32 (icon32.png)</p>
+        <button onclick="downloadIcon('icon32', 32)">Download</button>
+    </div>
+
+    <div class="icon-container">
+        <div class="icon icon-48" id="icon48">🔓</div>
+        <p>48x48 (icon48.png)</p>
+        <button onclick="downloadIcon('icon48', 48)">Download</button>
+    </div>
+
+    <div class="icon-container">
+        <div class="icon icon-128" id="icon128">🔓</div>
+        <p>128x128 (icon128.png)</p>
+        <button onclick="downloadIcon('icon128', 128)">Download</button>
+    </div>
+
+    <div class="instructions">
+        <h2>Alternative: Use Online Icon Generators</h2>
+        <p>You can also use online tools like:</p>
+        <ul>
+            <li><a href="https://favicon.io/favicon-generator/" target="_blank">Favicon.io</a></li>
+            <li><a href="https://www.canva.com/create/logos/" target="_blank">Canva</a></li>
+            <li><a href="https://icon-library.com/" target="_blank">Icon Library</a></li>
+        </ul>
+        <p>Search for "lock" or "unlock" icons, or create custom ones with your preferred design.</p>
+    </div>
+
+    <script>
+        function downloadIcon(elementId, size) {
+            const element = document.getElementById(elementId);
+            
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // Fill background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Add text
+            ctx.fillStyle = 'white';
+            ctx.font = `${size * 0.6}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🔓', size / 2, size / 2);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
